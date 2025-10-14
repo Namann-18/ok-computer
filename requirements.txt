@@ -1,0 +1,104 @@
+# ================================================================================
+# Space Station Safety Object Detection - Requirements
+# ================================================================================
+# Production-grade dependencies for YOLOv8m training and deployment
+# Python 3.8+ required
+# ================================================================================
+
+# Core ML Framework
+# ================================================================================
+torch>=2.0.0                    # PyTorch deep learning framework
+torchvision>=0.15.0            # Computer vision utilities
+ultralytics>=8.0.200           # YOLOv8 implementation
+onnx>=1.14.0                   # ONNX model format support
+onnxruntime>=1.15.0            # ONNX inference runtime
+
+# Data Processing
+# ================================================================================
+numpy>=1.24.0                  # Numerical computing
+opencv-python>=4.8.0           # Computer vision operations
+opencv-contrib-python>=4.8.0   # Additional OpenCV modules
+Pillow>=10.0.0                 # Image processing
+albumentations>=1.3.1          # Advanced image augmentation
+scipy>=1.10.0                  # Scientific computing
+
+# Visualization and Plotting
+# ================================================================================
+matplotlib>=3.7.0              # Plotting library
+seaborn>=0.12.0                # Statistical visualization
+plotly>=5.14.0                 # Interactive plots
+tensorboard>=2.13.0            # TensorBoard logging
+
+# Configuration and Logging
+# ================================================================================
+pyyaml>=6.0                    # YAML configuration files
+colorlog>=6.7.0                # Colored logging output
+tqdm>=4.65.0                   # Progress bars
+rich>=13.4.0                   # Rich terminal output
+
+# Data Science and Analysis
+# ================================================================================
+pandas>=2.0.0                  # Data manipulation
+scikit-learn>=1.3.0            # Machine learning utilities
+scikit-image>=0.21.0           # Image processing algorithms
+
+# Model Optimization and Export
+# ================================================================================
+openvino-dev>=2023.0.0         # Intel OpenVINO toolkit (optional)
+tensorrt>=8.6.0                # NVIDIA TensorRT (optional, requires CUDA)
+coremltools>=6.3.0             # CoreML export for iOS (optional)
+tensorflow>=2.13.0             # TensorFlow/TFLite export (optional)
+
+# Experiment Tracking (Optional)
+# ================================================================================
+wandb>=0.15.0                  # Weights & Biases (optional)
+mlflow>=2.5.0                  # MLflow tracking (optional)
+comet-ml>=3.33.0               # Comet.ml tracking (optional)
+
+# Testing and Quality Assurance
+# ================================================================================
+pytest>=7.4.0                  # Testing framework
+pytest-cov>=4.1.0              # Coverage reporting
+black>=23.3.0                  # Code formatting
+flake8>=6.0.0                  # Code linting
+mypy>=1.4.0                    # Static type checking
+
+# Utilities
+# ================================================================================
+psutil>=5.9.0                  # System monitoring
+gpustat>=1.1.0                 # GPU monitoring
+py-cpuinfo>=9.0.0              # CPU information
+pycocotools>=2.0.6             # COCO evaluation utilities
+
+# Development Tools
+# ================================================================================
+jupyter>=1.0.0                 # Jupyter notebook
+ipywidgets>=8.0.0              # Interactive widgets
+notebook>=7.0.0                # Notebook interface
+
+# Performance Profiling
+# ================================================================================
+line_profiler>=4.0.0           # Line-by-line profiling
+memory_profiler>=0.61.0        # Memory usage profiling
+py-spy>=0.3.14                 # Sampling profiler
+
+# ================================================================================
+# Installation Instructions
+# ================================================================================
+# Basic installation (CPU):
+#   pip install -r requirements.txt
+#
+# GPU installation (CUDA 11.8):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+#   pip install -r requirements.txt
+#
+# GPU installation (CUDA 12.1):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#   pip install -r requirements.txt
+#
+# Development installation:
+#   pip install -r requirements.txt -e .
+#
+# For production deployment (minimal):
+#   pip install torch torchvision ultralytics onnxruntime opencv-python numpy pillow pyyaml
+# ================================================================================

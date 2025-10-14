@@ -1,0 +1,217 @@
+# ================================================================================
+# Advanced Data Augmentation Configuration
+# ================================================================================
+# Specialized augmentation strategies for space station safety object detection
+# Optimized for challenging lighting conditions and occlusion scenarios
+# ================================================================================
+
+# Base Augmentation Pipeline
+# ================================================================================
+base_augmentation:
+  enabled: true
+  description: "Standard augmentations applied to all training samples"
+  
+  # Color space augmentations (critical for lighting variations)
+  color:
+    hsv_hue: 0.015          # Hue shift (±1.5%)
+    hsv_saturation: 0.7     # Saturation adjustment (±70%)
+    hsv_value: 0.4          # Brightness adjustment (±40%)
+    brightness: 0.4         # Additional brightness control
+    contrast: 0.4           # Contrast adjustment
+    
+  # Geometric transformations
+  geometric:
+    rotation_degrees: 10     # Rotation angle (±10°)
+    translation: 0.1         # Translation (10% of image size)
+    scale_min: 0.5           # Minimum scale factor
+    scale_max: 1.5           # Maximum scale factor
+    shear_degrees: 2         # Shear transformation (±2°)
+    perspective: 0.0         # Perspective distortion
+    
+  # Flip augmentations
+  flip:
+    horizontal: 0.5          # 50% probability
+    vertical: 0.0            # No vertical flip (objects have orientation)
+
+# Advanced Augmentation Strategies
+# ================================================================================
+
+# Lighting Condition Augmentation (for dark/vdark robustness)
+# ================================================================================
+lighting_augmentation:
+  enabled: true
+  description: "Simulate various lighting conditions in space station"
+  probability: 0.3
+  
+  strategies:
+    # Simulate low-light conditions
+    low_light:
+      enabled: true
+      probability: 0.5
+      brightness_range: [0.3, 0.7]  # Reduce brightness
+      noise_level: 0.02              # Add sensor noise
+      
+    # Simulate very dark conditions
+    very_dark:
+      enabled: true
+      probability: 0.3
+      brightness_range: [0.1, 0.4]
+      noise_level: 0.05
+      gamma_correction: [0.5, 1.5]
+      
+    # Simulate overexposure (very light)
+    overexposure:
+      enabled: true
+      probability: 0.2
+      brightness_range: [1.3, 1.8]
+      saturation_reduce: 0.3
+      
+    # Simulate uneven lighting (shadows)
+    shadow:
+      enabled: true
+      probability: 0.3
+      shadow_intensity: 0.5
+      shadow_coverage: [0.2, 0.6]
+
+# Occlusion and Clutter Augmentation
+# ================================================================================
+occlusion_augmentation:
+  enabled: true
+  description: "Simulate cluttered environments and partial occlusions"
+  probability: 0.4
+  
+  strategies:
+    # Random erasing (simulates occlusion)
+    random_erasing:
+      enabled: true
+      probability: 0.4
+      scale: [0.02, 0.2]      # Size of erased region
+      ratio: [0.3, 3.3]       # Aspect ratio
+      max_count: 3            # Maximum number of erasures
+      
+    # Copy-paste augmentation (add objects from other images)
+    copy_paste:
+      enabled: true
+      probability: 0.1
+      max_objects: 3
+      scale_range: [0.5, 1.5]
+      
+    # Grid mask (simulates partial occlusion)
+    grid_mask:
+      enabled: true
+      probability: 0.2
+      ratio: 0.5
+      rotate: 15
+      
+    # Cutout augmentation
+    cutout:
+      enabled: true
+      probability: 0.3
+      num_holes: 4
+      hole_size: [20, 80]
+
+# Mosaic and MixUp Augmentation
+# ================================================================================
+mosaic_mixup:
+  enabled: true
+  description: "Advanced augmentation for multi-object scenarios"
+  
+  # Mosaic (combine 4 images)
+  mosaic:
+    enabled: true
+    probability: 1.0          # Apply to all batches
+    border: [-320, -320]      # Mosaic border
+    
+  # MixUp (blend two images)
+  mixup:
+    enabled: true
+    probability: 0.15
+    alpha: 0.5                # Blending factor
+    
+  # Disable after epoch N (optional)
+  disable_after_epoch: 250
+
+# Test-Time Augmentation (TTA)
+# ================================================================================
+tta:
+  enabled: false              # Enable during inference for higher accuracy
+  description: "Apply augmentations during inference and ensemble results"
+  
+  strategies:
+    scales: [0.83, 1.0, 1.17]  # Multi-scale inference
+    flips: [0, 1]              # No flip, horizontal flip
+    brightness: [0.9, 1.0, 1.1]
+
+# AutoAugment Policies
+# ================================================================================
+auto_augment:
+  enabled: true
+  policy: "randaugment"       # Options: randaugment, autoaugment, trivialaugment
+  
+  # RandAugment parameters
+  randaugment:
+    num_ops: 2                # Number of augmentation operations
+    magnitude: 9              # Magnitude of augmentations (0-30)
+    
+  # Custom augmentation pool
+  custom_ops:
+    - "AutoContrast"
+    - "Equalize"
+    - "Posterize"
+    - "Solarize"
+    - "Color"
+    - "Contrast"
+    - "Brightness"
+    - "Sharpness"
+
+# Augmentation Schedule
+# ================================================================================
+augmentation_schedule:
+  enabled: true
+  description: "Gradually reduce augmentation intensity during training"
+  
+  phases:
+    # Phase 1: Strong augmentation (epochs 0-150)
+    strong:
+      epochs: [0, 150]
+      mosaic_prob: 1.0
+      mixup_prob: 0.15
+      hsv_v: 0.4
+      
+    # Phase 2: Medium augmentation (epochs 150-250)
+    medium:
+      epochs: [150, 250]
+      mosaic_prob: 0.5
+      mixup_prob: 0.05
+      hsv_v: 0.2
+      
+    # Phase 3: Light augmentation (epochs 250-300)
+    light:
+      epochs: [250, 300]
+      mosaic_prob: 0.0
+      mixup_prob: 0.0
+      hsv_v: 0.1
+
+# Validation Augmentation
+# ================================================================================
+val_augmentation:
+  enabled: false              # Typically disabled for consistent validation
+  description: "Augmentations applied during validation (usually none)"
+  
+  # Minimal augmentation for validation
+  rect_training: true         # Rectangular inference (faster)
+  pad: 0.0                    # Padding
+  scale: 1.0                  # Fixed scale
+
+# Export and Documentation
+# ================================================================================
+metadata:
+  version: "1.0"
+  created: "2025-10-14"
+  description: "Production-grade augmentation pipeline for space station safety detection"
+  optimized_for:
+    - "Low-light conditions (dark, vdark)"
+    - "Cluttered environments"
+    - "Varied object scales"
+    - "Partial occlusions"
+  target_accuracy: "≥80% mAP@0.5"

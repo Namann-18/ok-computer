@@ -1,0 +1,59 @@
+# ================================================================================
+# Space Station Safety Object Detection Dataset Configuration
+# ================================================================================
+# Dataset: Synthetic Space Station Safety Objects
+# Classes: 7 critical safety equipment types
+# Task: Object detection and classification
+# Format: YOLO (class_id x_center y_center width height) - normalized coordinates
+# ================================================================================
+
+# Dataset root path (relative to project root)
+path: ./datasets
+
+# Training, validation, and test splits
+train: train/images
+val: val/images
+test: test/images
+
+# Number of object classes
+nc: 7
+
+# Class names (index corresponds to class_id in labels)
+names:
+  0: OxygenTank
+  1: NitrogenTank
+  2: FirstAidBox
+  3: FireAlarm
+  4: SafetySwitchPanel
+  5: EmergencyPhone
+  6: FireExtinguisher
+
+# Dataset metadata
+metadata:
+  version: "1.0"
+  created: "2025-10-14"
+  description: "Synthetic space station safety object detection dataset with varied lighting and occlusion conditions"
+  
+  # Scenario categories encoded in filenames
+  lighting_conditions:
+    - vlight  # Very light
+    - light   # Normal light
+    - dark    # Low light
+    - vdark   # Very dark
+  
+  occlusion_conditions:
+    - unclutter  # Clear view
+    - clutter    # Occluded/cluttered
+  
+  scene_types:
+    - hallway
+    - room
+    - cluttered_hallway
+    - cluttered_room
+
+# Image specifications
+image_format: "png"
+image_size: [640, 640]  # Default training size (will be auto-detected)
+
+# Label format
+label_format: "yolo"  # class_id x_center y_center width height (normalized 0-1)

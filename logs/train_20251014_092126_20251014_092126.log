@@ -1,0 +1,57 @@
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | ================================================================================
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | YOLOv8m Training Pipeline Initialized
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | ================================================================================
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | ================================================================================
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | Training Configuration
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | ================================================================================
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | epochs: 300
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | batch_size: 32
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | image_size: 640
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | cache_images: True
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | optimizer: AdamW
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | learning_rate: 0.0003
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | weight_decay: 0.0005
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | momentum: 0.937
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | lr_scheduler: cosine
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | warmup_epochs: 3
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | warmup_bias_lr: 0.1
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | warmup_momentum: 0.8
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | box_loss_gain: 7.5
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | cls_loss_gain: 0.5
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | dfl_loss_gain: 1.5
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | multi_scale: True
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | scale_range: [0.5, 1.5]
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | amp: True
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | patience: 50
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | device: 0
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | workers: 8
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | ================================================================================
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | ================================================================================
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | Dataset Configuration
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | ================================================================================
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | path: ./datasets
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | train: train/images
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | val: val/images
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | test: test/images
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | nc: 7
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | names:
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   0: OxygenTank
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   1: NitrogenTank
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   2: FirstAidBox
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   3: FireAlarm
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   4: SafetySwitchPanel
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   5: EmergencyPhone
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   6: FireExtinguisher
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | metadata:
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   version: 1.0
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   created: 2025-10-14
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   description: Synthetic space station safety object detection dataset with varied lighting and occlusion conditions
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   lighting_conditions: ['vlight', 'light', 'dark', 'vdark']
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   occlusion_conditions: ['unclutter', 'clutter']
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 |   scene_types: ['hallway', 'room', 'cluttered_hallway', 'cluttered_room']
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | image_format: png
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | image_size: [640, 640]
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | label_format: yolo
+2025-10-14 09:21:26 | INFO     | train_20251014_092126 | info:139 | ================================================================================
+2025-10-14 09:21:27 | INFO     | train_20251014_092126 | info:139 | Using GPU: Tesla V100-SXM2-16GB (cuda:0)
+2025-10-14 09:21:27 | INFO     | train_20251014_092126 | info:139 | Loading pre-trained model: yolov8m.pt

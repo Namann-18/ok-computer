@@ -1,0 +1,14 @@
+artifact_uri: /home/namannayak_16/yolov8/runs/mlflow/428884724227153915/5249e3876ffb45bbbe3d0bece9c67da0/artifacts
+end_time: 1760434166134
+entry_point_name: ''
+experiment_id: '428884724227153915'
+lifecycle_stage: active
+run_id: 5249e3876ffb45bbbe3d0bece9c67da0
+run_name: train
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760434148977
+status: 3
+tags: []
+user_id: namannayak_16
