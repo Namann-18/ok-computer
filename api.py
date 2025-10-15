@@ -18,6 +18,7 @@ from PIL import Image
 import logging
 from pathlib import Path
 import sys
+import torch
 
 # Add scripts to path for domain adaptation
 sys.path.append(str(Path(__file__).parent / 'scripts'))
@@ -46,7 +47,8 @@ app.add_middleware(
 # Global model variable
 model = None
 predictor = None  # TTA predictor
-MODEL_PATH = Path(r"E:\safeorbit\ok-computer\optimization_runs\strategy_4_extended_training_20251015_101328\weights\best.pt")
+# Use the improved model (90%+ mAP, works on real images)
+MODEL_PATH = Path("results/improved_model/train/weights/best.pt")
 
 class DetectionRequest(BaseModel):
     image: str  # Base64 encoded image
@@ -83,22 +85,22 @@ def load_model():
             logger.info(f"Loading model from {MODEL_PATH}")
             model = YOLO(str(MODEL_PATH))
             
-            # Initialize TTA predictor for enhanced real-world inference
-            predictor = TTAPredictor(
-                model_path=str(MODEL_PATH),
-                conf_threshold=0.25,
-                iou_threshold=0.45,
-                use_tta=True,
-                img_size=640
-            )
-            logger.info("✅ YOLOv8m model loaded successfully with TTA support")
+            # Force model to use CPU to avoid CUDA errors
+            model.to('cpu')
+            logger.info("Model set to use CPU")
+            
+            # Disable TTA predictor due to in-place tensor operations issue
+            # Use standard YOLO inference instead
+            predictor = None
+            logger.info("✅ YOLOv8m model loaded successfully (CPU mode, standard inference)")
             return
         
         # Fallback to YOLOv8n pretrained if custom model not found
         logger.warning("Custom model not found, loading YOLOv8n pretrained model")
         model = YOLO("yolov8n.pt")
+        model.to('cpu')
         predictor = None
-        logger.info("✅ YOLOv8n pretrained model loaded")
+        logger.info("✅ YOLOv8n pretrained model loaded (CPU mode)")
         
     except Exception as e:
         logger.error(f"❌ Failed to load model: {e}")
@@ -233,7 +235,6 @@ async def detect_objects(request: DetectionRequest):
     """
     Detect objects in base64 encoded image
     Returns detection metadata (no image)
-    Enhanced with TTA for real-world images
     """
     if model is None:
         raise HTTPException(status_code=503, detail="Model not loaded")
@@ -246,33 +247,10 @@ async def detect_objects(request: DetectionRequest):
         image = decode_base64_image(request.image)
         img_height, img_width = image.shape[:2]
         
-        # Use TTA predictor if enabled and available
-        if request.use_tta and predictor is not None:
-            # Use enhanced TTA predictor for better real-world accuracy
-            detections_list = predictor.predict_single(image, preprocess=True)
-            
-            # Convert to Detection format
-            detections = []
-            for det in detections_list:
-                x1, y1, x2, y2 = det['bbox']
-                x_norm = float(x1 / img_width)
-                y_norm = float(y1 / img_height)
-                w_norm = float((x2 - x1) / img_width)
-                h_norm = float((y2 - y1) / img_height)
-                
-                detections.append(Detection(
-                    name=det['class_name'],
-                    confidence=det['confidence'],
-                    bbox=BoundingBox(
-                        x=x_norm,
-                        y=y_norm,
-                        width=w_norm,
-                        height=h_norm
-                    )
-                ))
-        else:
-            # Standard inference (fallback)
-            results = model(image, conf=request.confidence, verbose=False)
+        # Use standard inference (TTA disabled to avoid tensor errors)
+        # Run inference on CPU with inference mode
+        with torch.inference_mode():
+            results = model(image, conf=request.confidence, verbose=False, device='cpu')
             result = results[0]
             
             # Extract detections
@@ -331,9 +309,10 @@ async def detect_objects_with_image(request: DetectionRequest):
         # Decode image
         image = decode_base64_image(request.image)
         
-        # Run inference
-        results = model(image, conf=request.confidence, verbose=False)
-        result = results[0]
+        # Run inference on CPU with inference mode
+        with torch.inference_mode():
+            results = model(image, conf=request.confidence, verbose=False, device='cpu')
+            result = results[0]
         
         # Extract detections
         detections = []
@@ -405,9 +384,10 @@ async def detect_from_upload(file: UploadFile = File(...), confidence: float = 0
         if image is None:
             raise HTTPException(status_code=400, detail="Invalid image file")
         
-        # Run inference
-        results = model(image, conf=confidence, verbose=False)
-        result = results[0]
+        # Run inference on CPU with inference mode
+        with torch.inference_mode():
+            results = model(image, conf=confidence, verbose=False, device='cpu')
+            result = results[0]
         
         # Extract detections
         detections = []
