@@ -1,0 +1,24 @@
+{
+  "all_results": [
+    {
+      "strategy": "strategy_4_extended_training",
+      "strategy_name": "Extended Training",
+      "timestamp": "2025-10-15T12:47:06.624252",
+      "mAP50": 0.85795955451981,
+      "mAP50-95": 0.7655332609730118,
+      "precision": 0.957965319120197,
+      "recall": 0.7431490490073178,
+      "model_path": "optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt"
+    }
+  ],
+  "best_result": {
+    "strategy": "strategy_4_extended_training",
+    "strategy_name": "Extended Training",
+    "timestamp": "2025-10-15T12:47:06.624252",
+    "mAP50": 0.85795955451981,
+    "mAP50-95": 0.7655332609730118,
+    "precision": 0.957965319120197,
+    "recall": 0.7431490490073178,
+    "model_path": "optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt"
+  }
+}
