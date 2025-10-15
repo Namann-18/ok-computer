@@ -186,25 +186,25 @@ class YOLOv8Optimizer:
         # Load model
         model = YOLO(str(self.model_path))
         
-        # Prepare training arguments
+        # Prepare training arguments with safe config access
         train_args = {
             'data': str(self.dataset_config),
-            'epochs': self.train_cfg['training']['epochs'],
-            'batch': self.train_cfg['training']['batch_size'],
-            'imgsz': self.train_cfg['training']['image_size'],
-            'device': self.train_cfg['hardware']['device'],
-            'workers': self.train_cfg['hardware']['num_workers'],
+            'epochs': self.train_cfg.get('training', {}).get('epochs', 300),
+            'batch': self.train_cfg.get('training', {}).get('batch_size', 16),
+            'imgsz': self.train_cfg.get('training', {}).get('image_size', 640),
+            'device': self.train_cfg.get('hardware', {}).get('device', 0),
+            'workers': self.train_cfg.get('hardware', {}).get('num_workers', 8),
             'project': './optimization_runs',
             'name': output_name,
             'exist_ok': True,
             'pretrained': False,
-            'optimizer': self.train_cfg['training']['optimizer'],
-            'lr0': self.train_cfg['training']['learning_rate'],
-            'patience': self.train_cfg['training']['patience'],
+            'optimizer': self.train_cfg.get('training', {}).get('optimizer', 'AdamW'),
+            'lr0': self.train_cfg.get('training', {}).get('learning_rate', 0.0003),
+            'patience': self.train_cfg.get('training', {}).get('patience', 50),
             'save': True,
             'save_period': 10,
-            'cache': self.train_cfg['training']['cache_images'],
-            'amp': self.train_cfg['training']['amp'],
+            'cache': self.train_cfg.get('training', {}).get('cache_images', True),
+            'amp': self.train_cfg.get('training', {}).get('amp', True),
             'verbose': True,
             'plots': True,
         }
