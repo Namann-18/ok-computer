@@ -36,7 +36,7 @@ BEST_MODEL_PATH = "optimization_runs/strategy_4_extended_training_20251015_10132
 DATASET_CONFIG = "configs/dataset.yaml"
 OUTPUT_DIR = Path("results/improved_model")
 EPOCHS = 350
-BATCH_SIZE = 32
+BATCH_SIZE = 16  # Reduced for V100 16GB (was 32)
 IMG_SIZE = 640
 DEVICE = "0"  # GPU
 
