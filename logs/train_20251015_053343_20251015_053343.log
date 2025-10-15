@@ -1,0 +1,133 @@
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | YOLOv8m Training Pipeline Initialized
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Training Configuration
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | epochs: 200
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | batch_size: 12
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | image_size: 640
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | cache_images: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | optimizer: AdamW
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | learning_rate: 0.0003
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | weight_decay: 0.0005
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | momentum: 0.937
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | lr_scheduler: cosine
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | warmup_epochs: 3
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | warmup_bias_lr: 0.1
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | warmup_momentum: 0.8
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | box_loss_gain: 7.5
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | cls_loss_gain: 0.5
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | dfl_loss_gain: 1.5
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | multi_scale: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | scale_range: [0.5, 1.5]
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | amp: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | patience: 50
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | device: 0
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | workers: 8
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Dataset Configuration
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | path: ./datasets
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | train: train/images
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | val: val/images
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | test: test/images
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | nc: 7
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | names:
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   0: OxygenTank
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   1: NitrogenTank
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   2: FirstAidBox
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   3: FireAlarm
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   4: SafetySwitchPanel
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   5: EmergencyPhone
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   6: FireExtinguisher
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | metadata:
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   version: 1.0
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   created: 2025-10-14
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   description: Synthetic space station safety object detection dataset with varied lighting and occlusion conditions
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   lighting_conditions: ['vlight', 'light', 'dark', 'vdark']
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   occlusion_conditions: ['unclutter', 'clutter']
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   scene_types: ['hallway', 'room', 'cluttered_hallway', 'cluttered_room']
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | image_format: png
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | image_size: [640, 640]
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | label_format: yolo
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Using GPU: Tesla V100-SXM2-16GB (cuda:0)
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Resuming from checkpoint: results/runs/train/weights/best.pt
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Model architecture: yolov8m
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Number of classes: 7
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Early stopping enabled (patience=50)
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Model checkpointing enabled (save_dir=./models)
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Trainer initialization complete
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Starting Training
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | ================================================================================
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | Training Parameters:
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   data: /home/namannayak_16/ok-computer/configs/dataset.yaml
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   epochs: 200
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   batch: 12
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   imgsz: 640
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   device: cuda:0
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   workers: 8
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   optimizer: AdamW
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   lr0: 0.0003
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   weight_decay: 0.0005
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   momentum: 0.937
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   lrf: 0.01
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   warmup_epochs: 3
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   warmup_bias_lr: 0.1
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   warmup_momentum: 0.8
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   box: 7.5
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   cls: 0.5
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   dfl: 1.5
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   hsv_h: 0.015
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   hsv_s: 0.7
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   hsv_v: 0.4
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   degrees: 10.0
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   translate: 0.1
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   scale: 0.5
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   shear: 0.0
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   perspective: 0.0
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   flipud: 0.0
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   fliplr: 0.5
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   mosaic: 0.8
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   mixup: 0.1
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   copy_paste: 0.05
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   erasing: 0.4
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   multi_scale: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   amp: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   val: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   save: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   save_period: 10
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   conf: 0.001
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   iou: 0.7
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   max_det: 300
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   project: ./results/runs
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   name: train
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   exist_ok: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   plots: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   verbose: True
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   patience: 50
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   seed: 42
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   deterministic: False
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 |   resume: results/runs/train/weights/best.pt
+2025-10-15 05:33:43 | INFO     | train_20251015_053343 | info:139 | 
+Training started...
+2025-10-15 05:34:07 | ERROR    | train_20251015_053343 | error:147 | Training failed with error: results/runs/train/weights/best.pt training to 300 epochs is finished, nothing to resume.
+Start a new training without resuming, i.e. 'yolo train model=results/runs/train/weights/best.pt'
+Traceback (most recent call last):
+  File "/home/namannayak_16/ok-computer/scripts/train.py", line 227, in train
+    results = self.model.train(**train_args)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/model.py", line 800, in train
+    self.trainer.train()
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/trainer.py", line 238, in train
+    self._do_train()
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/trainer.py", line 359, in _do_train
+    self._setup_train()
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/trainer.py", line 351, in _setup_train
+    self.resume_training(ckpt)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/trainer.py", line 866, in resume_training
+    assert start_epoch > 0, (
+AssertionError: results/runs/train/weights/best.pt training to 300 epochs is finished, nothing to resume.
+Start a new training without resuming, i.e. 'yolo train model=results/runs/train/weights/best.pt'
