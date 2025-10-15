@@ -32,8 +32,8 @@ import json
 from tqdm import tqdm
 
 # Configuration
-BEST_MODEL_PATH = r"E:\safeorbit\ok-computer\optimization_runs\strategy_4_extended_training_20251015_101328\weights\best.pt"
-DATASET_CONFIG = r"configs/dataset.yaml"
+BEST_MODEL_PATH = "optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt"
+DATASET_CONFIG = "configs/dataset.yaml"
 OUTPUT_DIR = Path("results/improved_model")
 EPOCHS = 350
 BATCH_SIZE = 32
