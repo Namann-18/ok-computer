@@ -16,26 +16,26 @@ model:
 # ================================================================================
 training:
   # Core parameters
-  epochs: 300                # Extended training for convergence
-  batch_size: 32            # Optimized for V100 16GB VRAM - INCREASED for speed
+  epochs: 350                # Extended training for better convergence (increased from 300)
+  batch_size: 32            # Optimized for V100 16GB VRAM on Google Cloud
   image_size: 640           # Standard YOLO input size
   cache_images: true        # Cache images in RAM for faster loading (V100 has enough memory)
   
   # Optimizer settings
   optimizer: "AdamW"        # AdamW for better generalization
-  learning_rate: 0.0003     # Increased for faster convergence with larger batch (32)
-  weight_decay: 0.0005      # L2 regularization
+  learning_rate: 0.0002     # Slightly reduced for fine-tuning (was 0.0003)
+  weight_decay: 0.0008      # Increased L2 regularization for better generalization (was 0.0005)
   momentum: 0.937           # SGD momentum (if using SGD)
   
   # Learning rate schedule
   lr_scheduler: "cosine"    # Cosine annealing with warmup
-  warmup_epochs: 3          # Gradual warmup
+  warmup_epochs: 5          # Increased warmup for stability (was 3)
   warmup_bias_lr: 0.1       # Warmup initial LR for bias
   warmup_momentum: 0.8      # Warmup momentum
   
-  # Loss function weights
-  box_loss_gain: 7.5        # Bounding box loss weight
-  cls_loss_gain: 0.5        # Classification loss weight
+  # Loss function weights (adjusted for better bbox accuracy)
+  box_loss_gain: 8.0        # Increased bbox loss weight (was 7.5) - critical for precise localization
+  cls_loss_gain: 0.6        # Increased classification weight (was 0.5) - better class accuracy
   dfl_loss_gain: 1.5        # Distribution focal loss weight
   
   # Multi-scale training
@@ -46,39 +46,47 @@ training:
   amp: true                 # Automatic Mixed Precision for faster training
   
   # Early stopping
-  patience: 50              # Stop if no improvement for N epochs
+  patience: 60              # Increased patience (was 50) - allow more time for convergence
   
   # Hardware
   device: "0"               # GPU device ID (use "cpu" for CPU training)
-  workers: 8                # Multi-worker data loading for V100 (increased from 0)
+  workers: 8                # Multi-worker data loading for V100
   
-# Data Augmentation (Optimized for challenging scenarios)
+  # Domain Adaptation (NEW - Critical for synthetic-to-real transfer)
+  domain_adaptation: true   # Enable domain adaptation augmentations
+  
+# Data Augmentation (Enhanced for Real-World Generalization)
 # ================================================================================
 augmentation:
   # Spatial augmentations
-  hsv_h: 0.015             # HSV-Hue augmentation (±)
-  hsv_s: 0.7               # HSV-Saturation augmentation (±)
-  hsv_v: 0.4               # HSV-Value (brightness) augmentation - critical for lighting
+  hsv_h: 0.02              # Increased HSV-Hue augmentation (was 0.015)
+  hsv_s: 0.8               # Increased saturation variation (was 0.7)
+  hsv_v: 0.5               # Increased brightness variation (was 0.4) - critical for real images
   
   # Geometric augmentations
-  degrees: 10.0            # Rotation (degrees ±)
-  translate: 0.1           # Translation (fraction ±)
-  scale: 0.5               # Scale variation (gain ±)
-  shear: 0.0               # Shear (degrees ±)
-  perspective: 0.0         # Perspective distortion
+  degrees: 15.0            # Increased rotation (was 10.0) - more orientation variety
+  translate: 0.15          # Increased translation (was 0.1) - more position variety
+  scale: 0.6               # Increased scale variation (was 0.5)
+  shear: 2.0               # Added shear (was 0.0) - perspective variations
+  perspective: 0.0003      # Added perspective distortion (was 0.0)
   
   # Flip augmentations
   flipud: 0.0              # Vertical flip probability
   fliplr: 0.5              # Horizontal flip probability
   
-  # Advanced augmentations (reduced for memory)
-  mosaic: 0.8              # Reduced from 1.0 to 0.8
-  mixup: 0.1               # Reduced from 0.15 to 0.1
-  copy_paste: 0.05         # Reduced from 0.1 to 0.05
+  # Advanced augmentations (optimized for domain transfer)
+  mosaic: 0.9              # Increased from 0.8 - better multi-object learning
+  mixup: 0.15              # Increased from 0.1 - better generalization
+  copy_paste: 0.1          # Increased from 0.05 - more object variety
   
-  # Lighting augmentations (critical for dark scenarios)
+  # Lighting augmentations (critical for real-world scenarios)
   auto_augment: "randaugment"  # AutoAugment policy
-  erasing: 0.4             # Random erasing probability (simulates occlusion)
+  erasing: 0.5             # Increased random erasing (was 0.4) - better occlusion handling
+  
+  # Domain-specific augmentations (NEW)
+  gaussian_noise: 0.4      # Simulate camera sensor noise
+  blur: 0.3                # Simulate motion/focus blur
+  compression: 0.4         # Simulate JPEG compression artifacts
 
 # Validation Settings
 # ================================================================================
@@ -87,14 +95,18 @@ validation:
   save_interval: 10        # Save checkpoint every N epochs
   save_period: -1          # Save checkpoint every N epochs (-1 = only save best)
   
-  # Metrics
+  # Metrics (optimized for real-world performance)
   iou_threshold: 0.5       # IoU threshold for mAP calculation
-  conf_threshold: 0.001    # Confidence threshold for predictions
-  nms_iou: 0.7             # NMS IoU threshold
+  conf_threshold: 0.25     # Increased from 0.001 for better precision in real images
+  nms_iou: 0.65            # Reduced from 0.7 for better duplicate removal
   max_det: 300             # Maximum detections per image
   
   # Validation augmentation
   rect: false              # Rectangular training (faster but less accurate)
+  
+  # Test-Time Augmentation (TTA) for validation (NEW)
+  tta: true                # Enable TTA for more robust validation metrics
+  tta_scales: [0.9, 1.0, 1.1]  # Multi-scale TTA
   
 # Model Checkpointing
 # ================================================================================
@@ -142,12 +154,15 @@ advanced:
 # Target Performance Metrics
 # ================================================================================
 target_metrics:
-  map50: 0.80              # Target mAP@0.5 ≥ 80%
-  map50_95: 0.60           # Target mAP@0.5:0.95 ≥ 60%
-  precision: 0.85          # Target precision ≥ 85%
-  recall: 0.80             # Target recall ≥ 80%
+  map50: 0.90              # Target mAP@0.5 ≥ 90% (increased from 80%)
+  map50_95: 0.70           # Target mAP@0.5:0.95 ≥ 70% (increased from 60%)
+  precision: 0.90          # Target precision ≥ 90% (increased from 85%)
+  recall: 0.85             # Target recall ≥ 85% (increased from 80%)
   
   # Scenario-specific targets (challenging conditions)
-  dark_map50: 0.70         # Dark scenarios ≥ 70% mAP
-  vdark_map50: 0.65        # Very dark scenarios ≥ 65% mAP
-  clutter_map50: 0.75      # Cluttered scenarios ≥ 75% mAP
+  dark_map50: 0.80         # Dark scenarios ≥ 80% mAP (increased from 70%)
+  vdark_map50: 0.75        # Very dark scenarios ≥ 75% mAP (increased from 65%)
+  clutter_map50: 0.85      # Cluttered scenarios ≥ 85% mAP (increased from 75%)
+  
+  # Real-world inference target (NEW)
+  real_world_map50: 0.90   # Real image performance ≥ 90% mAP
