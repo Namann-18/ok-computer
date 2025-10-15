@@ -1,0 +1,257 @@
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | YOLOv8m Training Pipeline Initialized[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Training Configuration[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | epochs: 350[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | batch_size: 32[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | image_size: 640[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | cache_images: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | optimizer: AdamW[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | learning_rate: 0.0002[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | weight_decay: 0.0008[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | momentum: 0.937[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | lr_scheduler: cosine[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | warmup_epochs: 5[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | warmup_bias_lr: 0.1[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | warmup_momentum: 0.8[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | box_loss_gain: 8.0[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | cls_loss_gain: 0.6[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | dfl_loss_gain: 1.5[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | multi_scale: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | scale_range: [0.5, 1.5][0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | amp: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | patience: 60[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | device: 0[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | workers: 8[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | domain_adaptation: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Dataset Configuration[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | path: ./datasets[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | train: train/images[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | val: val/images[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | test: test/images[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | nc: 7[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | names:[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   0: OxygenTank[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   1: NitrogenTank[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   2: FirstAidBox[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   3: FireAlarm[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   4: SafetySwitchPanel[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   5: EmergencyPhone[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   6: FireExtinguisher[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | metadata:[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   version: 1.0[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   created: 2025-10-14[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   description: Synthetic space station safety object detection dataset with varied lighting and occlusion conditions[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   lighting_conditions: ['vlight', 'light', 'dark', 'vdark'][0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   occlusion_conditions: ['unclutter', 'clutter'][0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   scene_types: ['hallway', 'room', 'cluttered_hallway', 'cluttered_room'][0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | image_format: png[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | image_size: [640, 640][0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | label_format: yolo[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Using GPU: Tesla V100-SXM2-16GB (cuda:0)[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Loading pre-trained model: yolov8m.pt[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Model architecture: yolov8m[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Number of classes: 7[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Early stopping enabled (patience=60)[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Model checkpointing enabled (save_dir=./models)[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Trainer initialization complete[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Starting Training[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | ================================================================================[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | Training Parameters:[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   data: /home/namannayak_16/ok-computer/configs/dataset.yaml[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   epochs: 350[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   batch: 32[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   imgsz: 640[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   device: cuda:0[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   workers: 8[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   optimizer: AdamW[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   lr0: 0.0002[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   weight_decay: 0.0008[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   momentum: 0.937[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   lrf: 0.01[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   warmup_epochs: 5[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   warmup_bias_lr: 0.1[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   warmup_momentum: 0.8[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   box: 8.0[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   cls: 0.6[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   dfl: 1.5[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   hsv_h: 0.02[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   hsv_s: 0.8[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   hsv_v: 0.5[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   degrees: 15.0[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   translate: 0.15[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   scale: 0.6[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   shear: 2.0[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   perspective: 0.0003[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   flipud: 0.0[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   fliplr: 0.5[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   mosaic: 0.9[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   mixup: 0.15[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   copy_paste: 0.1[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   erasing: 0.5[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   multi_scale: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   amp: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   val: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   save: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   save_period: 10[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   conf: 0.25[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   iou: 0.65[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   max_det: 300[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   project: ./results/runs[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   name: train[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   exist_ok: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   plots: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   verbose: True[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   patience: 60[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   seed: 42[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 |   deterministic: False[0m
+[32m2025-10-15 20:21:35 | INFO     | train_20251015_202135 | 
+Training started...[0m
+Ultralytics 8.3.214 🚀 Python-3.10.17 torch-2.4.0+cu124 CUDA:0 (Tesla V100-SXM2-16GB, 16144MiB)
+[34m[1mengine/trainer: [0magnostic_nms=False, amp=True, augment=False, auto_augment=randaugment, batch=32, bgr=0.0, box=8.0, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.6, compile=False, conf=0.25, copy_paste=0.1, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=/home/namannayak_16/ok-computer/configs/dataset.yaml, degrees=15.0, deterministic=False, device=0, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, epochs=350, erasing=0.5, exist_ok=True, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.02, hsv_s=0.8, hsv_v=0.5, imgsz=640, int8=False, iou=0.65, keras=False, kobj=1.0, line_width=None, lr0=0.0002, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.15, mode=train, model=yolov8m.pt, momentum=0.937, mosaic=0.9, multi_scale=True, name=train, nbs=64, nms=False, opset=None, optimize=False, optimizer=AdamW, overlap_mask=True, patience=60, perspective=0.0003, plots=True, pose=12.0, pretrained=True, profile=False, project=./results/runs, rect=False, resume=False, retina_masks=False, save=True, save_conf=False, save_crop=False, save_dir=/home/namannayak_16/ok-computer/results/runs/train, save_frames=False, save_json=False, save_period=10, save_txt=False, scale=0.6, seed=42, shear=2.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.15, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=5, warmup_momentum=0.8, weight_decay=0.0008, workers=8, workspace=None
+Overriding model.yaml nc=80 with nc=7
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1      1392  ultralytics.nn.modules.conv.Conv             [3, 48, 3, 2]                 
+  1                  -1  1     41664  ultralytics.nn.modules.conv.Conv             [48, 96, 3, 2]                
+  2                  -1  2    111360  ultralytics.nn.modules.block.C2f             [96, 96, 2, True]             
+  3                  -1  1    166272  ultralytics.nn.modules.conv.Conv             [96, 192, 3, 2]               
+  4                  -1  4    813312  ultralytics.nn.modules.block.C2f             [192, 192, 4, True]           
+  5                  -1  1    664320  ultralytics.nn.modules.conv.Conv             [192, 384, 3, 2]              
+  6                  -1  4   3248640  ultralytics.nn.modules.block.C2f             [384, 384, 4, True]           
+  7                  -1  1   1991808  ultralytics.nn.modules.conv.Conv             [384, 576, 3, 2]              
+  8                  -1  2   3985920  ultralytics.nn.modules.block.C2f             [576, 576, 2, True]           
+  9                  -1  1    831168  ultralytics.nn.modules.block.SPPF            [576, 576, 5]                 
+ 10                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 11             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 12                  -1  2   1993728  ultralytics.nn.modules.block.C2f             [960, 384, 2]                 
+ 13                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 14             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 15                  -1  2    517632  ultralytics.nn.modules.block.C2f             [576, 192, 2]                 
+ 16                  -1  1    332160  ultralytics.nn.modules.conv.Conv             [192, 192, 3, 2]              
+ 17            [-1, 12]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 18                  -1  2   1846272  ultralytics.nn.modules.block.C2f             [576, 384, 2]                 
+ 19                  -1  1   1327872  ultralytics.nn.modules.conv.Conv             [384, 384, 3, 2]              
+ 20             [-1, 9]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 21                  -1  2   4207104  ultralytics.nn.modules.block.C2f             [960, 576, 2]                 
+ 22        [15, 18, 21]  1   3779749  ultralytics.nn.modules.head.Detect           [7, [192, 384, 576]]          
+Model summary: 169 layers, 25,860,373 parameters, 25,860,357 gradients, 79.1 GFLOPs
+
+Transferred 469/475 items from pretrained weights
+Freezing layer 'model.22.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks...
+[34m[1mAMP: [0mchecks passed ✅
+[34m[1mtrain: [0mFast image access ✅ (ping: 0.0±0.0 ms, read: 4883.7±2129.6 MB/s, size: 2870.5 KB)
+[K[34m[1mtrain: [0mScanning /home/namannayak_16/ok-computer/datasets/train/labels.cache... 1769 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 1769/1769 255.9Mit/s 0.0s[K[34m[1mtrain: [0mScanning /home/namannayak_16/ok-computer/datasets/train/labels.cache... 1769 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 1769/1769 29.4Mit/s 0.0s
+[34m[1malbumentations: [0mBlur(p=0.01, blur_limit=(3, 7)), MedianBlur(p=0.01, blur_limit=(3, 7)), ToGray(p=0.01, method='weighted_average', num_output_channels=3), CLAHE(p=0.01, clip_limit=(1.0, 4.0), tile_grid_size=(8, 8))
+[34m[1mval: [0mFast image access ✅ (ping: 0.0±0.0 ms, read: 3163.9±2235.5 MB/s, size: 3037.8 KB)
+[K[34m[1mval: [0mScanning /home/namannayak_16/ok-computer/datasets/val/labels.cache... 338 images, 15 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 338/338 8.1Mit/s 0.0s[K[34m[1mval: [0mScanning /home/namannayak_16/ok-computer/datasets/val/labels.cache... 338 images, 15 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 338/338 1.8Mit/s 0.0s
+Plotting labels to /home/namannayak_16/ok-computer/results/runs/train/labels.jpg... 
+[34m[1moptimizer:[0m AdamW(lr=0.0002, momentum=0.937) with parameter groups 77 weight(decay=0.0), 84 weight(decay=0.0008), 83 bias(decay=0.0)
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/namannayak_16/ok-computer/results/runs/train[0m
+Starting training for 350 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      1/350      5.79G      2.132      5.102      1.899        231        736: 0% ──────────── 0/56  4.2s[K      1/350       5.8G      2.097      5.162      1.732        198        352: 2% ──────────── 1/56 0.1it/s 6.4s<6:32[K      1/350       5.8G      2.136      5.094      1.716        155        320: 4% ──────────── 2/56 0.4it/s 7.3s<2:03[K      1/350      5.81G      2.075      5.032      1.637        242        384: 5% ╸─────────── 3/56 0.6it/s 8.2s<1:25[K      1/350       6.9G      2.062      4.982      1.634        201        512: 7% ╸─────────── 4/56 0.8it/s 9.0s<1:05[K      1/350      7.91G      2.032      4.945      1.614        280        544: 9% ━─────────── 5/56 0.9it/s 10.0s<58.8s[K      1/350      7.91G      2.032      4.945      1.614        280        544: 11% ━─────────── 6/56 1.7it/s 10.3s<30.0s
+[31m2025-10-15 20:22:09 | ERROR    | train_20251015_202135 | Training failed with error: CUDA out of memory. Tried to allocate 128.00 MiB. GPU 0 has a total capacity of 15.77 GiB of which 3.44 MiB is free. Including non-PyTorch memory, this process has 15.76 GiB memory in use. Of the allocated memory 14.87 GiB is allocated by PyTorch, and 494.27 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)[0m
+Traceback (most recent call last):
+  File "/home/namannayak_16/ok-computer/scripts/train.py", line 227, in train
+    results = self.model.train(**train_args)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/model.py", line 800, in train
+    self.trainer.train()
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/trainer.py", line 238, in train
+    self._do_train()
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/trainer.py", line 422, in _do_train
+    loss, self.loss_items = self.model(batch)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 138, in forward
+    return self.loss(x, *args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 338, in loss
+    preds = self.forward(batch["img"])
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 139, in forward
+    return self.predict(x, *args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 157, in predict
+    return self._predict_once(x, profile, visualize, embed)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 180, in _predict_once
+    x = m(x)  # run
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/modules/block.py", line 319, in forward
+    return self.cv2(torch.cat(y, 1))
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/modules/conv.py", line 81, in forward
+    return self.act(self.bn(self.conv(x)))
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 176, in forward
+    return F.batch_norm(
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/functional.py", line 2512, in batch_norm
+    return torch.batch_norm(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 128.00 MiB. GPU 0 has a total capacity of 15.77 GiB of which 3.44 MiB is free. Including non-PyTorch memory, this process has 15.76 GiB memory in use. Of the allocated memory 14.87 GiB is allocated by PyTorch, and 494.27 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/namannayak_16/ok-computer/scripts/train.py", line 551, in <module>
+    main()
+  File "/home/namannayak_16/ok-computer/scripts/train.py", line 535, in main
+    results = trainer.train()
+  File "/home/namannayak_16/ok-computer/scripts/train.py", line 227, in train
+    results = self.model.train(**train_args)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/model.py", line 800, in train
+    self.trainer.train()
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/trainer.py", line 238, in train
+    self._do_train()
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/engine/trainer.py", line 422, in _do_train
+    loss, self.loss_items = self.model(batch)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 138, in forward
+    return self.loss(x, *args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 338, in loss
+    preds = self.forward(batch["img"])
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 139, in forward
+    return self.predict(x, *args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 157, in predict
+    return self._predict_once(x, profile, visualize, embed)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/tasks.py", line 180, in _predict_once
+    x = m(x)  # run
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/modules/block.py", line 319, in forward
+    return self.cv2(torch.cat(y, 1))
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/namannayak_16/.local/lib/python3.10/site-packages/ultralytics/nn/modules/conv.py", line 81, in forward
+    return self.act(self.bn(self.conv(x)))
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 176, in forward
+    return F.batch_norm(
+  File "/opt/python/3.10/lib/python3.10/site-packages/torch/nn/functional.py", line 2512, in batch_norm
+    return torch.batch_norm(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 128.00 MiB. GPU 0 has a total capacity of 15.77 GiB of which 3.44 MiB is free. Including non-PyTorch memory, this process has 15.76 GiB memory in use. Of the allocated memory 14.87 GiB is allocated by PyTorch, and 494.27 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
