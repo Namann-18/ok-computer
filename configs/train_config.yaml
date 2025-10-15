@@ -17,7 +17,7 @@ model:
 training:
   # Core parameters
   epochs: 300                # Extended training for convergence
-  batch_size: 16            # Optimized for V100 16GB VRAM (increased from 4)
+  batch_size: 32            # Optimized for V100 16GB VRAM - INCREASED for speed
   image_size: 640           # Standard YOLO input size
   cache_images: true        # Cache images in RAM for faster loading (V100 has enough memory)
   
