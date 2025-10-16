@@ -1,7 +1,14 @@
 # ⚡ FAST 2-HOUR OPTIMIZER - FINAL RUN
 
 ## 🎯 Goal
-Push mAP@50 from **85.8% → 90%** in just **2 hours** (last optimization run)
+# ⚡ FAST 2-HOUR OPTIMIZER - Quick Start Guide
+
+**Target**: Push mAP@50 from **86.2%** → **90%** in maximum **2 hours**
+
+**Current Status**: 
+- ✅ Baseline: 86.2% mAP@50 (epoch 40 of improved model)
+- 🎯 Target: 90% mAP@50 (3.8% improvement needed)
+- ⏱️ Time Budget: 2 hours maximum
 
 ---
 

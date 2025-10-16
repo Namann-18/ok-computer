@@ -12,7 +12,7 @@ Techniques:
     - Data sampling strategies
     - Class balancing
     
-Goal: Push mAP@50 from 85.8% to 90%+ through systematic optimization
+Goal: Push mAP@50 from 86.2% to 90%+ through systematic optimization
 
 Author: Space Station Safety Detection Team  
 Date: 2025-10-16
@@ -47,7 +47,7 @@ class YOLOv8Optimizer:
         train_config: str,
         optimization_goal: str = 'map50',
         target_score: float = 0.90,
-        baseline_score: float = 0.858,  # Current best mAP@50
+        baseline_score: float = 0.862,  # Updated baseline from improved model (86.157% mAP@50)
         final_dir: str = './final'
     ):
         """

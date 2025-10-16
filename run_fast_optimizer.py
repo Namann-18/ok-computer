@@ -10,10 +10,10 @@ from pathlib import Path
 
 def main():
     # Configuration
-    BEST_MODEL = "optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt"
+    BEST_MODEL = "results/improved_model/train/weights/best.pt"
     DATASET_CONFIG = "configs/dataset.yaml"
     TRAIN_CONFIG = "configs/train_config.yaml"
-    BASELINE = 0.858
+    BASELINE = 0.862  # Updated from new best model (86.157% mAP@50 at epoch 40)
     TARGET = 0.90
     FINAL_DIR = "./final"
     

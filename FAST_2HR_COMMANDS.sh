@@ -14,11 +14,11 @@ cd ~/safeorbit/ok-computer
 
 # Run in foreground (watch progress)
 python scripts/model_optimizer.py \
-  --model optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt \
+  --model results/improved_model/train/weights/best.pt \
   --data configs/dataset.yaml \
   --config configs/train_config.yaml \
   --target 0.90 \
-  --baseline 0.858 \
+  --baseline 0.862 \
   --final-dir ./final \
   --strategies strategy_fast_boost strategy_quick_tune
 
@@ -28,27 +28,26 @@ python scripts/model_optimizer.py \
 # ==========================
 # One ultra-aggressive strategy (~45 min)
 
-python scripts/model_optimizer.py \
-  --model optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt \
-  --data configs/dataset.yaml \
-  --config configs/train_config.yaml \
-  --target 0.90 \
-  --baseline 0.858 \
-  --final-dir ./final \
-  --strategies strategy_fast_boost
-
-
+# STEP 3C: Run SINGLE strategy (Rapid Convergence - 45 epochs, ~30 min)
+python3 scripts/model_optimizer.py \
+  --model results/improved_model/train/weights/best.pt \
+  --dataset configs/dataset.yaml \
+  --train-config configs/train_config.yaml \
+  --strategy strategy_rapid_convergence \
+  --baseline-score 0.862 \
+  --target-score 0.90 \
+  --final-dir ./final
 # ==========================
 # OPTION 3: ALL 3 FAST STRATEGIES
 # ==========================
 # Try all 3 quick strategies (~2 hours exactly)
 
 python scripts/model_optimizer.py \
-  --model optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt \
+  --model results/improved_model/train/weights/best.pt \
   --data configs/dataset.yaml \
   --config configs/train_config.yaml \
   --target 0.90 \
-  --baseline 0.858 \
+  --baseline 0.862 \
   --final-dir ./final \
   --strategies strategy_fast_boost strategy_quick_tune strategy_rapid_convergence
 
@@ -60,7 +59,7 @@ python scripts/model_optimizer.py \
 tmux new -s fast_opt
 
 # Inside tmux:
-cd ~/safeorbit/ok-computer && python scripts/model_optimizer.py --model optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt --data configs/dataset.yaml --config configs/train_config.yaml --target 0.90 --baseline 0.858 --final-dir ./final --strategies strategy_fast_boost strategy_quick_tune
+cd ~/safeorbit/ok-computer && python scripts/model_optimizer.py --model results/improved_model/train/weights/best.pt --data configs/dataset.yaml --config configs/train_config.yaml --target 0.90 --baseline 0.862 --final-dir ./final --strategies strategy_fast_boost strategy_quick_tune
 
 # Detach: Ctrl+B then D
 # Reattach: tmux attach -t fast_opt
@@ -106,15 +105,15 @@ cat final/metrics_*.json | tail -20
 # ============================================================================
 
 # Realistic in 2 hours:
-# - 85.8% → 87.5-88.5% (good improvement)
-# - Maybe 89% if lucky
-# - 90% is possible but needs more time usually
+# - 86.2% → 87.5-89% (good improvement, starting from better baseline)
+# - 90% is within reach with 3.8% improvement needed
+# - Fast strategies optimized for rapid convergence
 
-# Any model > 85.8% is automatically saved to ./final/
+# Any model > 86.2% is automatically saved to ./final/
 
 
 # ============================================================================
 # ONE-LINER (COPY THIS):
 # ============================================================================
 
-cd ~/safeorbit/ok-computer && python scripts/model_optimizer.py --model optimization_runs/strategy_4_extended_training_20251015_101328/weights/best.pt --data configs/dataset.yaml --config configs/train_config.yaml --target 0.90 --baseline 0.858 --final-dir ./final --strategies strategy_fast_boost strategy_quick_tune
+cd ~/safeorbit/ok-computer && python scripts/model_optimizer.py --model results/improved_model/train/weights/best.pt --data configs/dataset.yaml --config configs/train_config.yaml --target 0.90 --baseline 0.862 --final-dir ./final --strategies strategy_fast_boost strategy_quick_tune
