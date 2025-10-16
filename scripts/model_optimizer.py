@@ -12,11 +12,11 @@ Techniques:
     - Data sampling strategies
     - Class balancing
     
-Goal: Push mAP from 0.846 to 0.90+ through systematic optimization
+Goal: Push mAP@50 from 85.8% to 90%+ through systematic optimization
 
 Author: Space Station Safety Detection Team  
-Date: 2025-10-15
-Version: 1.0
+Date: 2025-10-16
+Version: 2.0 - Enhanced for 90% mAP@50 target with auto-save to final/
 ================================================================================
 """
 
@@ -46,7 +46,9 @@ class YOLOv8Optimizer:
         dataset_config: str,
         train_config: str,
         optimization_goal: str = 'map50',
-        target_score: float = 0.90
+        target_score: float = 0.90,
+        baseline_score: float = 0.858,  # Current best mAP@50
+        final_dir: str = './final'
     ):
         """
         Initialize optimizer.
@@ -56,13 +58,20 @@ class YOLOv8Optimizer:
             dataset_config: Path to dataset configuration
             train_config: Path to training configuration
             optimization_goal: Metric to optimize ('map50', 'map', 'precision', 'recall')
-            target_score: Target metric score
+            target_score: Target metric score (default: 0.90 for 90% mAP@50)
+            baseline_score: Current baseline score to beat (default: 0.858)
+            final_dir: Directory to save models that beat baseline
         """
         self.model_path = Path(model_path)
         self.dataset_config = Path(dataset_config)
         self.train_config = Path(train_config)
         self.optimization_goal = optimization_goal
         self.target_score = target_score
+        self.baseline_score = baseline_score
+        self.final_dir = Path(final_dir)
+        
+        # Create final directory if it doesn't exist
+        self.final_dir.mkdir(parents=True, exist_ok=True)
         
         # Load configurations
         with open(self.dataset_config, 'r') as f:
@@ -78,10 +87,13 @@ class YOLOv8Optimizer:
         )
         
         self.logger.info("="*80)
-        self.logger.info("YOLOv8 Model Optimizer Initialized")
+        self.logger.info("YOLOv8 Model Optimizer v2.0 - Enhanced Edition")
         self.logger.info(f"Base model: {self.model_path}")
+        self.logger.info(f"Current baseline: {baseline_score:.4f} mAP@50")
         self.logger.info(f"Optimization goal: {optimization_goal}")
-        self.logger.info(f"Target score: {target_score}")
+        self.logger.info(f"Target score: {target_score:.4f} (90% mAP@50)")
+        self.logger.info(f"Improvement needed: {(target_score - baseline_score):.4f}")
+        self.logger.info(f"Final models directory: {self.final_dir}")
         self.logger.info("="*80)
     
     def get_optimization_strategies(self) -> Dict[str, Dict[str, Any]]:
@@ -137,24 +149,125 @@ class YOLOv8Optimizer:
                 'name': 'Extended Training',
                 'description': 'More epochs with cosine annealing',
                 'params': {
-                    'epochs': 400,  # Increased from 300
-                    'patience': 75,  # Increased patience
+                    'epochs': 500,  # Increased from 400 for better convergence
+                    'patience': 100,  # More patience
                     'close_mosaic': 20,  # Disable mosaic in last N epochs
                 }
             },
-            'strategy_5_multi_scale': {
-                'name': 'Multi-Scale Training',
-                'description': 'Train on multiple image scales',
+            'strategy_5_ultra_extended': {
+                'name': 'Ultra Extended Training',
+                'description': 'Maximum epochs for 90% target',
                 'params': {
-                    'scale': 0.9,  # Scale variation
-                    'imgsz': 704,  # Larger input size
+                    'epochs': 600,  # Maximum training
+                    'patience': 120,
+                    'close_mosaic': 30,
+                    'lr0': 0.0008,  # Higher initial LR
+                    'lrf': 0.005,   # Lower final LR multiplier
+                    'warmup_epochs': 10,
+                    'momentum': 0.96,
+                    'weight_decay': 0.001,
                 }
             },
-            'strategy_6_class_balanced': {
-                'name': 'Class Balanced Sampling',
-                'description': 'Balance training across classes',
+            'strategy_6_advanced_aug': {
+                'name': 'Advanced Augmentation + Extended',
+                'description': 'Combine aggressive aug with extended training',
                 'params': {
-                    'cls': 1.5,  # Higher classification loss weight
+                    'epochs': 500,
+                    'patience': 100,
+                    'hsv_h': 0.025,
+                    'hsv_s': 0.9,
+                    'hsv_v': 0.6,
+                    'degrees': 25.0,
+                    'translate': 0.25,
+                    'scale': 0.95,
+                    'shear': 12.0,
+                    'flipud': 0.25,
+                    'fliplr': 0.5,
+                    'mosaic': 1.0,
+                    'mixup': 0.4,
+                    'copy_paste': 0.4,
+                    'close_mosaic': 25,
+                }
+            },
+            'strategy_7_loss_tuned': {
+                'name': 'Fine-Tuned Loss Functions',
+                'description': 'Optimized loss weights for 90% target',
+                'params': {
+                    'epochs': 500,
+                    'patience': 100,
+                    'box': 8.0,  # Higher box loss
+                    'cls': 1.2,  # Higher class loss
+                    'dfl': 2.0,  # Higher DFL loss
+                    'lr0': 0.0007,
+                    'lrf': 0.008,
+                }
+            },
+            'strategy_8_mega_batch': {
+                'name': 'Large Batch Extended Training',
+                'description': 'Larger batch with extended epochs',
+                'params': {
+                    'epochs': 550,
+                    'batch': 32,  # Larger batch if GPU allows
+                    'patience': 110,
+                    'lr0': 0.001,  # Higher LR for larger batch
+                    'close_mosaic': 30,
+                }
+            },
+            'strategy_fast_boost': {
+                'name': 'Fast Aggressive Boost (2hr)',
+                'description': 'Maximum impact in 60 epochs - aggressive everything',
+                'params': {
+                    'epochs': 60,
+                    'patience': 15,
+                    'lr0': 0.0015,  # Higher LR for faster convergence
+                    'lrf': 0.01,
+                    'warmup_epochs': 3,
+                    'momentum': 0.97,
+                    'weight_decay': 0.0012,
+                    'box': 9.0,  # Very high box loss
+                    'cls': 1.5,  # Very high cls loss
+                    'dfl': 2.5,  # Very high DFL
+                    'hsv_h': 0.03,
+                    'hsv_s': 1.0,
+                    'hsv_v': 0.7,
+                    'degrees': 30.0,
+                    'translate': 0.3,
+                    'scale': 1.0,
+                    'mixup': 0.5,
+                    'copy_paste': 0.5,
+                    'close_mosaic': 5,
+                }
+            },
+            'strategy_quick_tune': {
+                'name': 'Quick Fine-Tune (2hr)',
+                'description': 'Fast fine-tuning with optimized losses',
+                'params': {
+                    'epochs': 50,
+                    'patience': 12,
+                    'lr0': 0.001,
+                    'lrf': 0.005,
+                    'warmup_epochs': 2,
+                    'box': 10.0,  # Maximum box loss for precision
+                    'cls': 2.0,   # Maximum class loss
+                    'dfl': 3.0,   # Maximum DFL
+                    'momentum': 0.98,
+                    'weight_decay': 0.0015,
+                }
+            },
+            'strategy_rapid_convergence': {
+                'name': 'Rapid Convergence (2hr)',
+                'description': 'Fast convergence with high learning rate',
+                'params': {
+                    'epochs': 45,
+                    'patience': 10,
+                    'lr0': 0.002,  # Very high initial LR
+                    'lrf': 0.001,
+                    'warmup_epochs': 2,
+                    'momentum': 0.99,
+                    'weight_decay': 0.002,
+                    'box': 8.5,
+                    'cls': 1.8,
+                    'dfl': 2.2,
                 }
             }
         }
@@ -242,6 +355,41 @@ class YOLOv8Optimizer:
         self.logger.info(f"  mAP@0.5:0.95: {metrics['mAP50-95']:.4f}")
         self.logger.info(f"  Precision: {metrics['precision']:.4f}")
         self.logger.info(f"  Recall: {metrics['recall']:.4f}")
+        
+        # Check if this beats the baseline
+        if metrics['mAP50'] > self.baseline_score:
+            improvement = metrics['mAP50'] - self.baseline_score
+            self.logger.info(f"\n🎉 NEW RECORD! Improvement: +{improvement:.4f}")
+            self.logger.info(f"  Previous best: {self.baseline_score:.4f}")
+            self.logger.info(f"  New best: {metrics['mAP50']:.4f}")
+            
+            # Copy best model to final directory
+            import shutil
+            source_model = Path(metrics['model_path'])
+            if source_model.exists():
+                timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                final_model_name = f"best_mAP{metrics['mAP50']:.4f}_{strategy_name}_{timestamp}.pt"
+                final_model_path = self.final_dir / final_model_name
+                
+                shutil.copy2(source_model, final_model_path)
+                self.logger.info(f"\n✅ Model saved to: {final_model_path}")
+                
+                # Also save as 'best.pt' (overwrite previous best)
+                best_model_path = self.final_dir / 'best.pt'
+                shutil.copy2(source_model, best_model_path)
+                self.logger.info(f"✅ Updated: {best_model_path}")
+                
+                # Save metrics
+                metrics_file = self.final_dir / f"metrics_{timestamp}.json"
+                with open(metrics_file, 'w') as f:
+                    json.dump(metrics, f, indent=2)
+                self.logger.info(f"✅ Metrics saved: {metrics_file}")
+                
+                # Update baseline for next iteration
+                self.baseline_score = metrics['mAP50']
+        else:
+            self.logger.info(f"\n📊 No improvement over baseline ({self.baseline_score:.4f})")
+        
         self.logger.info("="*80 + "\n")
         
         return metrics
@@ -320,8 +468,16 @@ class YOLOv8Optimizer:
             self.logger.info(f"  Recall: {best_result['recall']:.4f}")
             self.logger.info(f"  Model: {best_result['model_path']}")
             
-            improvement = best_result['mAP50'] - 0.84336  # Starting mAP
-            self.logger.info(f"\n📈 Improvement: {improvement:+.4f}")
+            improvement = best_result['mAP50'] - 0.858  # Current baseline
+            self.logger.info(f"\n📈 Total Improvement: {improvement:+.4f}")
+            
+            if best_result['mAP50'] >= self.target_score:
+                self.logger.info(f"\n🎯 TARGET ACHIEVED! {best_result['mAP50']:.4f} >= {self.target_score:.4f}")
+            else:
+                remaining = self.target_score - best_result['mAP50']
+                self.logger.info(f"\n📊 Progress: {best_result['mAP50']:.4f}/{self.target_score:.4f}")
+                self.logger.info(f"   Still needed: {remaining:.4f} to reach 90%")
+            
             self.logger.info("="*80)
             
             # Save results
@@ -374,7 +530,19 @@ def main():
         '--target',
         type=float,
         default=0.90,
-        help='Target metric score'
+        help='Target mAP@50 score (default: 0.90 for 90%%)'
+    )
+    parser.add_argument(
+        '--baseline',
+        type=float,
+        default=0.858,
+        help='Current baseline mAP@50 to beat (default: 0.858)'
+    )
+    parser.add_argument(
+        '--final-dir',
+        type=str,
+        default='./final',
+        help='Directory to save improved models (default: ./final)'
     )
     parser.add_argument(
         '--strategies',
@@ -391,7 +559,9 @@ def main():
         dataset_config=args.data,
         train_config=args.config,
         optimization_goal=args.goal,
-        target_score=args.target
+        target_score=args.target,
+        baseline_score=args.baseline,
+        final_dir=args.final_dir
     )
     
     # Run optimization
